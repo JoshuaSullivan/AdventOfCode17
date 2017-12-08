@@ -4,6 +4,8 @@ import Swift
 
 let input = 277678
 
+//: ### Part 1 - Manhattan Distance
+
 struct SpiralArrayGeometry: CustomStringConvertible {
     
     let dimension: Int
@@ -35,7 +37,7 @@ let cardinalDistances = cardinals.map({ Int(($0 - input).magnitude) }).sorted()
 let travelDistance = geometry.ringOrder + cardinalDistances[0]
 print("Distance traveled: \(travelDistance)")
 
-//: ### Part 2
+//: ### Part 2 - Neighbor Sum
 
 struct ArrayCoordinate: CustomStringConvertible {
     let x: Int
@@ -79,7 +81,6 @@ func sum(for array: [[Int]], at position: ArrayCoordinate) -> Int {
 
 func findNextCoordinate(from coordinate: ArrayCoordinate, index: Int) -> ArrayCoordinate {
     let geometry = SpiralArrayGeometry(value: index)
-    print(geometry)
     let distance = index - geometry.entryIndex
     let fi = geometry.featureInterval
     if distance < fi { return coordinate + up }
@@ -92,10 +93,10 @@ var index = 1
 var value = 0
 repeat {
     value = max(1, sum(for: spiralArray, at: currentPosition))
-    print("\(index): \(currentPosition) = \(value)")
     spiralArray[currentPosition.x][currentPosition.y] = value
     currentPosition = findNextCoordinate(from: currentPosition, index: index)
     index += 1
 } while (value <= input)
+print("First value greater than input is: \(value)")
 
 //: [Previous Page](@previous) | [Next Page](@next)
