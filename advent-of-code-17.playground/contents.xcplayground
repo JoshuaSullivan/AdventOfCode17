@@ -4,5 +4,8 @@
         <page name='Day 01 - Reverse Captcha'/>
         <page name='Day 02 - Corruption Checksum'/>
         <page name='Day 03 - Spiral Memory'/>
+        <page name='Day 04 - High-Entropy Passphrases'/>
+        <page name='Day 05 - Twisty Trampolines'/>
+        <page name='Day 06 - Memory Reallocation'/>
     </pages>
 </playground>
