@@ -8,5 +8,8 @@
         <page name='Day 05 - Twisty Trampolines'/>
         <page name='Day 06 - Memory Reallocation'/>
         <page name='Day 07 - Recursive Circus'/>
+        <page name='Day 08 - I Heard You Like Registers'/>
+        <page name='Day 09 - Stream Processing'/>
+        <page name='Day 10 - Knot Hash'/>
     </pages>
 </playground>
