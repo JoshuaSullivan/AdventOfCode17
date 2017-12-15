@@ -2,8 +2,8 @@ import Foundation
 
 public struct KnotHash {
     
-    private var knot: [Int] = []
-    private var hash: [Int] = []
+    private var knot: [UInt8] = []
+    private var hash: [UInt8] = []
     
     public init(lengths: [Int]) {
         knot = createKnot(with: lengths)
@@ -17,8 +17,8 @@ public struct KnotHash {
         hash = createHash(from: knot)
     }
     
-    private func createKnot(with lengths: [Int]) -> [Int] {
-        var data = Array(0..<256)
+    private func createKnot(with lengths: [Int]) -> [UInt8] {
+        var data = Array<UInt8>(0...255)
         var skipSize = 0
         var index = 0
         for _ in (0..<64) {
@@ -32,7 +32,7 @@ public struct KnotHash {
         return data
     }
     
-    private func createHash(from knot: [Int]) -> [Int] {
+    private func createHash(from knot: [UInt8]) -> [UInt8] {
         return stride(from:0, to: 255, by: 16).map({
             index in
             let range = index..<(index + 16)
@@ -40,11 +40,11 @@ public struct KnotHash {
         })
     }
     
-    public var knotBytes: [Int] {
+    public var knotBytes: [UInt8] {
         return knot
     }
     
-    public var hashBytes: [Int] {
+    public var hashBytes: [UInt8] {
         return hash
     }
     
@@ -58,6 +58,15 @@ public struct KnotHash {
     
     public var numberOfOnes: Int {
         return hashString.reduce(0, { $0 + $1.numberOfOnes })
+    }
+    
+    public var bitField: [FieldBit] {
+        let range = 0..<8
+        let allFieldBits: [FieldBit] = hash.flatMap({
+            (byte) -> [FieldBit] in
+            return range.map({ ((byte >> $0) & 1) == 1 ? .filled : .empty }).reversed()
+        })
+        return allFieldBits
     }
 }
 
