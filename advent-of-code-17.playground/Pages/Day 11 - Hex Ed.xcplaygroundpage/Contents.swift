@@ -48,8 +48,6 @@ guard
     else {
         fatalError("Could not find input file.")
 }
-//let input = "se,sw,se,sw,sw"
-
 let trimmedInput = input.trimmingCharacters(in: .whitespacesAndNewlines)
 let allDirections = trimmedInput.split(separator: ",").flatMap({ HexDirection(rawValue: String($0)) })
 let finalCoordinate: Coordinate = allDirections.reduce(Coordinate.zero, { $0 + $1.coordinate })
